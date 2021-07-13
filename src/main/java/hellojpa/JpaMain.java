@@ -16,15 +16,29 @@ public class JpaMain {
         tx.begin();
 
         try {
+            /*
+            // 저장
             Member member = new Member();
             member.setId(1L);
             member.setName("MOMO");
 
-            em.persist(member); // 저장
-            System.out.println("저장 완료");
+            em.persist(member);
+             */
+
+            /*
+            // 조회
+            Member findMember = em.find(Member.class, 1L);
+            System.out.println("findMember.id : " + findMember.getId());
+            System.out.println("findMember.name : " + findMember.getName());
+             */
+
+            // 수장
+            Member findMember = em.find(Member.class, 1L);
+            findMember.setName("DD");
+
             tx.commit();
         } catch (Exception e) {
-            System.out.println("저장 실패 " + e.getMessage());
+            System.out.println("실패 " + e.getMessage());
             tx.rollback();
         } finally {
             em.close();
