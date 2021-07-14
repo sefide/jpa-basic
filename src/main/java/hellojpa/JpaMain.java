@@ -22,6 +22,7 @@ public class JpaMain {
 //            em.detach(member); // update 쿼리 발생 X
             em.clear();
 
+            Member member2 = em.find(Member.class, 7L); // 1차 캐시에 다시 올림 (select)
             System.out.println("======================");
             tx.commit();
         } catch (Exception e) {
