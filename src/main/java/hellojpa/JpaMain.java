@@ -4,6 +4,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import java.time.LocalDateTime;
+import java.util.Date;
 
 public class JpaMain {
 
@@ -16,15 +18,16 @@ public class JpaMain {
         tx.begin();
 
         try {
-            Member member = em.find(Member.class, 7L);
-            member.setName("NA");
+            Member member = new Member();
+            member.setId(1L);
+            member.setUsername("A");
+            member.setRoleType(RoleType.USER);
+            member.setCreatedDate(new Date());
+            member.setTestDateTime(LocalDateTime.now());
 
-//            em.detach(member); // update 쿼리 발생 X
-            em.clear();
-
-            Member member2 = em.find(Member.class, 7L); // 1차 캐시에 다시 올림 (select)
-            System.out.println("======================");
+            em.persist(member);
             tx.commit();
+            System.out.println("COMMIT");
         } catch (Exception e) {
             System.out.println("ERROR");
             tx.rollback();
