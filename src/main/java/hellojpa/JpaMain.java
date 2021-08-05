@@ -19,13 +19,19 @@ public class JpaMain {
 
         try {
             Member member = new Member();
-            member.setId(1L);
+            member.setId(2L);
             member.setUsername("A");
             member.setRoleType(RoleType.USER);
             member.setCreatedDate(new Date());
             member.setTestDateTime(LocalDateTime.now());
 
             em.persist(member);
+
+            Item item = new Item();
+//            item.setId("ID_ASDWE");
+            item.setName("title");
+
+            em.persist(item);
             tx.commit();
             System.out.println("COMMIT");
         } catch (Exception e) {
