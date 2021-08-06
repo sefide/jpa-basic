@@ -18,20 +18,15 @@ public class JpaMain {
         tx.begin();
 
         try {
-            Member member = new Member();
-            member.setId(2L);
-            member.setUsername("A");
-            member.setRoleType(RoleType.USER);
-            member.setCreatedDate(new Date());
-            member.setTestDateTime(LocalDateTime.now());
+            Team team = new Team();
+            team.setName("AAA");
+            em.persist(team);
 
-            em.persist(member);
+            User user = new User();
+            user.setUsername("MOMO");
+            user.setTeam(team);
+            em.persist(user);
 
-            Item item = new Item();
-//            item.setId("ID_ASDWE");
-            item.setName("title");
-
-            em.persist(item);
             tx.commit();
             System.out.println("COMMIT");
         } catch (Exception e) {
@@ -42,5 +37,21 @@ public class JpaMain {
         }
 
         emf.close();
+    }
+
+    public void pkMethod(EntityManager em) {
+        Member member = new Member();
+        member.setId(2L);
+        member.setUsername("A");
+        member.setRoleType(RoleType.USER);
+        member.setCreatedDate(new Date());
+        member.setTestDateTime(LocalDateTime.now());
+
+        em.persist(member);
+
+        Item item = new Item();
+        item.setName("title");
+
+        em.persist(item);
     }
 }
