@@ -6,6 +6,7 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.List;
 
 public class JpaMain {
 
@@ -31,10 +32,12 @@ public class JpaMain {
             em.clear();
 
             Membership findMembership = em.find(Membership.class, user.getId());
-            System.out.println("findUser : " + findMembership.getUsername());
+            System.out.println("findMembership : " + findMembership.getUsername());
+            List<Membership> members = findMembership.getTeam().getMembers();
 
-            Team newTeam = em.find(Team.class, 100L);
-            findMembership.setTeam(newTeam);
+            for (Membership m : members) {
+                System.out.println("membership = " + m.getUsername());
+            }
 
             tx.commit();
             System.out.println("COMMIT");
