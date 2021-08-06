@@ -22,10 +22,19 @@ public class JpaMain {
             team.setName("AAA");
             em.persist(team);
 
-            User user = new User();
+            Membership user = new Membership();
             user.setUsername("MOMO");
             user.setTeam(team);
             em.persist(user);
+
+            em.flush();
+            em.clear();
+
+            Membership findMembership = em.find(Membership.class, user.getId());
+            System.out.println("findUser : " + findMembership.getUsername());
+
+            Team newTeam = em.find(Team.class, 100L);
+            findMembership.setTeam(newTeam);
 
             tx.commit();
             System.out.println("COMMIT");

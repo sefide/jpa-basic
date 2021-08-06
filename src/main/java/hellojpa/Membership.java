@@ -3,7 +3,7 @@ package hellojpa;
 import javax.persistence.*;
 
 @Entity
-public class User {
+public class Membership {
 
     @Id
     @GeneratedValue
