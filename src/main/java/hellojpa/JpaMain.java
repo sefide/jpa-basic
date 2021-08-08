@@ -23,23 +23,28 @@ public class JpaMain {
             team.setName("AAA");
             em.persist(team);
 
-            Membership user = new Membership();
-            user.setUsername("MOMO");
-            user.setTeam(team);
-            em.persist(user);
+            Membership membership = new Membership();
+            membership.setUsername("MOMO");
+            membership.setTeam(team);
+            em.persist(membership);
 
-            em.flush();
-            em.clear();
+            // 아래 코드를 주석처리하면 findMembership.getTeam().getMembers() 데이터 안나온다.
+            team.getMembers().add(membership); // 완전한 객체
 
-            Membership findMembership = em.find(Membership.class, user.getId());
+//            em.flush();
+//            em.clear();
+
+            Membership findMembership = em.find(Membership.class, membership.getId()); // 1차 캐시
             System.out.println("findMembership : " + findMembership.getUsername());
             List<Membership> members = findMembership.getTeam().getMembers();
 
+            System.out.println("=======================");
             for (Membership m : members) {
                 System.out.println("membership = " + m.getUsername());
             }
+            System.out.println("=======================");
 
-            tx.commit();
+            tx.commit(); // 이 때 insert 진행
             System.out.println("COMMIT");
         } catch (Exception e) {
             System.out.println("ERROR");
