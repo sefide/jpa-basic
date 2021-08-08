@@ -36,7 +36,8 @@ public class Membership {
         this.username = username;
     }
 
-    public void setTeam(Team team) {
+    public void changeTeam(Team team) {
         this.team = team;
+        team.getMembers().add(this);
     }
 }

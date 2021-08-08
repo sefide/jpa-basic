@@ -25,11 +25,11 @@ public class JpaMain {
 
             Membership membership = new Membership();
             membership.setUsername("MOMO");
-            membership.setTeam(team);
+            membership.changeTeam(team); // **
             em.persist(membership);
 
             // 아래 코드를 주석처리하면 findMembership.getTeam().getMembers() 데이터 안나온다.
-            team.getMembers().add(membership); // 완전한 객체
+//            team.getMembers().add(membership); // ** 완전한 객체 => 연관관계의 편의 메소드 membership.setTeam(team)
 
 //            em.flush();
 //            em.clear();
