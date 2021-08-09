@@ -19,32 +19,18 @@ public class JpaMain {
         tx.begin();
 
         try {
-            Team team = new Team();
-            team.setName("AAA");
-            em.persist(team);
-
             Membership membership = new Membership();
             membership.setUsername("MOMO");
-            membership.changeTeam(team); // **
+
             em.persist(membership);
 
-            // 아래 코드를 주석처리하면 findMembership.getTeam().getMembers() 데이터 안나온다.
-//            team.getMembers().add(membership); // ** 완전한 객체 => 연관관계의 편의 메소드 membership.setTeam(team)
+            Team team = new Team();
+            team.setName("AAA");
 
-//            em.flush();
-//            em.clear();
+            team.getMembers().add(membership); /* create one-to-many row hellojpa.Team.members */ // update 살행
+            em.persist(team);
 
-            Membership findMembership = em.find(Membership.class, membership.getId()); // 1차 캐시
-            System.out.println("findMembership : " + findMembership.getUsername());
-            List<Membership> members = findMembership.getTeam().getMembers();
-
-            System.out.println("=======================");
-            for (Membership m : members) {
-                System.out.println("membership = " + m.getUsername());
-            }
-            System.out.println("=======================");
-
-            tx.commit(); // 이 때 insert 진행
+            tx.commit();
             System.out.println("COMMIT");
         } catch (Exception e) {
             System.out.println("ERROR");

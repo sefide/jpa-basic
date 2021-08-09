@@ -12,20 +12,12 @@ public class Membership {
     @Column(name = "USERNAME")
     private String username;
 
-    @ManyToOne
-    @JoinColumn(name = "TEAM_ID") // 연관관계의 주인 (외래키)
-    private Team team;
-
     public Long getId() {
         return id;
     }
 
     public String getUsername() {
         return username;
-    }
-
-    public Team getTeam() {
-        return team;
     }
 
     public void setId(Long id) {
@@ -36,8 +28,4 @@ public class Membership {
         this.username = username;
     }
 
-    public void changeTeam(Team team) {
-        this.team = team;
-        team.getMembers().add(this);
-    }
 }
