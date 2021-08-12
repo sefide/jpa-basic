@@ -3,16 +3,15 @@ package hellojpa;
 import javax.persistence.*;
 
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
-@DiscriminatorColumn
-public class Item {
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+public abstract class Item {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.TABLE)
     private String id;
 
-    @Column(name = "title", nullable = false)
     private String name;
+    private int price;
 
     public Item() {
     }

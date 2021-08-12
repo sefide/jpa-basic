@@ -52,9 +52,9 @@ public class JpaMain {
 
         em.persist(member);
 
-        Item item = new Item();
-        item.setName("title");
-
-        em.persist(item);
+//        Item item = new Item();
+//        item.setName("title");
+//
+//        em.persist(item);
     }
 }
