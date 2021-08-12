@@ -2,12 +2,11 @@ package hellojpa;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @Entity
-public class Member {
+public class Member extends BaseEntity {
 
-    @Id
+    @Id @GeneratedValue
     private Long id;
 
     @Column(name = "name")
@@ -17,12 +16,6 @@ public class Member {
 
     @Enumerated(EnumType.STRING)
     private RoleType roleType;
-
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date createdDate;
-
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date lastModifiedDate;
 
     private LocalDateTime testDateTime;
 
@@ -48,14 +41,6 @@ public class Member {
         return roleType;
     }
 
-    public Date getCreatedDate() {
-        return createdDate;
-    }
-
-    public Date getLastModifiedDate() {
-        return lastModifiedDate;
-    }
-
     public String getDescription() {
         return description;
     }
@@ -78,14 +63,6 @@ public class Member {
 
     public void setRoleType(RoleType roleType) {
         this.roleType = roleType;
-    }
-
-    public void setCreatedDate(Date createdDate) {
-        this.createdDate = createdDate;
-    }
-
-    public void setLastModifiedDate(Date lastModifiedDate) {
-        this.lastModifiedDate = lastModifiedDate;
     }
 
     public void setDescription(String description) {
